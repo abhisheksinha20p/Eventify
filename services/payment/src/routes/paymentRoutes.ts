@@ -4,7 +4,7 @@ import { protect } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
-router.post('/create-intent', protect, createPaymentIntent);
-router.post('/webhook', express.raw({type: 'application/json'}), handleWebhook); 
+router.post('/create-intent', protect as any, createPaymentIntent as any);
+router.post('/', express.raw({type: 'application/json'}), handleWebhook as any); 
 
 export default router;

@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/payments', paymentRoutes);
+app.use('/', paymentRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Payment Service is running' });

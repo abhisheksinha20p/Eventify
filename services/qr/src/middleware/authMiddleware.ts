@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export interface AuthRequest extends Request {
-  user?: any;
-  headers: {
-    authorization?: string;
-    'x-user-id'?: string;
-    'x-user-role'?: string;
-  }
+  user: any;
 }
 
 export const extractUser = (req: AuthRequest, res: Response, next: NextFunction) => {

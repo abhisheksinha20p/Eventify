@@ -4,8 +4,8 @@ import { protect } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
-router.post('/', protect, createBooking);
-router.get('/my', protect, getMyBookings);
-router.patch('/:id/status', updateBookingStatus); // Internal use, add middleware if needed (e.g. check secret)
+router.post('/', protect as any, createBooking as any);
+router.get('/my', protect as any, getMyBookings as any);
+router.patch('/:id/status', updateBookingStatus as any); // Internal use, add middleware if needed (e.g. check secret)
 
 export default router;

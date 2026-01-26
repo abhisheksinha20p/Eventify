@@ -17,7 +17,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.use('/qr', qrRoutes);
+app.use('/', qrRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'QR Service is running' });

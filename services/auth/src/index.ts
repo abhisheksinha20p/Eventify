@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
+import morgan from 'morgan';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
 
@@ -13,9 +14,10 @@ const app = express();
 
 app.use(cors());
 app.use(helmet());
+app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/auth', authRoutes);
+app.use('/', authRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Auth Service is running' });

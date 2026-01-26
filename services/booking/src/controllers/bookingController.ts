@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import axios from 'axios';
 import Booking from '../models/Booking';
 import { AuthRequest } from '../middleware/authMiddleware';
@@ -84,7 +84,7 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
 export const updateBookingStatus = async (req: Request, res: Response) => {
     try {
         const { status } = req.body as any;
-        const { id } = req.params;
+        const { id } = req.params as any;
         const booking = await Booking.findById(id);
 
         if (!booking) {
