@@ -15,7 +15,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.use('/bookings', bookingRoutes);
+app.use('/', bookingRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Booking Service is running' });

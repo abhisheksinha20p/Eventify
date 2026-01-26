@@ -39,28 +39,13 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
 export const getPublicEvents = async (req: AuthRequest, res: Response) => {
   try {
     const { city } = req.query;
+    const query: any = { isPublished: true };
 
-    if (!city) {
-        res.status(400).json({ message: 'City parameter is required for public feed' });
-        return;
+    if (city) {
+        query.city = { $regex: new RegExp(city as string, 'i') };
     }
 
-    // "Strict visibility rule for paid events": 
-    // Plan says "Filter by city (Strict visibility rule for paid events)".
-    // Usually means: Users only see paid events in their city? 
-    // Or maybe defaults to all, but optimized for city.
-    // Plan: "GET /events/public: Filter by city".
-    // I will return all published events in that city.
-    
-    // Note: Assuming 'PAID' events are the public ones usually? Or both?
-    // Plan 3. Event Service: "Events collection... type (PAID/UNPAID)..."
-    // "GET /events/public: Filter by city".
-    
-    const events = await Event.find({ 
-        city: { $regex: new RegExp(city as string, 'i') }, // Case insensitive
-        isPublished: true,
-        // Only showing requests future events ideally, but kept simple.
-    });
+    const events = await Event.find(query);
 
     res.json(events);
   } catch (error: any) {

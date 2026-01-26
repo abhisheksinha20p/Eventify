@@ -15,7 +15,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.use('/approvals', approvalRoutes);
+app.use('/', approvalRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Approval Service is running' });

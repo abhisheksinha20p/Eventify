@@ -15,7 +15,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.use('/events', eventRoutes);
+app.use('/', eventRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Event Service is running' });

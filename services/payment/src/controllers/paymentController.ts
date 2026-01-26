@@ -1,4 +1,4 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 import Stripe from 'stripe';
 import axios from 'axios';
 import Transaction from '../models/Transaction';
@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string || 'sk_test_placeholder', {
-  apiVersion: '2025-01-27.acacia', // Use latest or matching version
+  apiVersion: '2025-12-15.clover', // Use matching version from types
 });
 
 const BOOKING_SERVICE_URL = process.env.BOOKING_SERVICE_URL || 'http://localhost:3004/bookings';

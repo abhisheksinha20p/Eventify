@@ -15,7 +15,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.use('/notifications', notificationRoutes);
+app.use('/', notificationRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'Notification Service is running' });

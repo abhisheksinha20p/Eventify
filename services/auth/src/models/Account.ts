@@ -36,17 +36,16 @@ AccountSchema.methods.matchPassword = async function (enteredPassword: string): 
   return await bcrypt.compare(enteredPassword, this.passwordHash);
 };
 
-AccountSchema.pre('save', async function (next) {
+AccountSchema.pre<IAccount>('save', async function () {
   if (!this.isModified('passwordHash')) {
-    return next();
+    return;
   }
   
   try {
     const salt = await bcrypt.genSalt(10);
     this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
-    next();
   } catch (err: any) {
-    next(err);
+    throw err;
   }
 });
 

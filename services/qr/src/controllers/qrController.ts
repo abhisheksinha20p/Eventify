@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { redisClient } from '../config/redis';
 import QRCodeModel from '../models/QRCode';
@@ -10,7 +10,7 @@ import { AuthRequest } from '../middleware/authMiddleware';
 // @access  Private (User who owns booking)
 export const generateQR = async (req: AuthRequest, res: Response) => {
     try {
-        const { bookingId } = req.params;
+        const { bookingId } = req.params as any;
         const userId = req.user.id;
 
         // Verify ownership (Mocked or call Booking Service)
@@ -57,7 +57,7 @@ export const generateQR = async (req: AuthRequest, res: Response) => {
 // @access  Private (Organizer/Gatekeeper)
 export const scanQR = async (req: AuthRequest, res: Response) => {
     try {
-        const { code, bookingId } = req.body; // Client sends what it scanned
+        const { code, bookingId } = req.body as any; // Client sends what it scanned
         const scannedBy = req.user.id;
 
         // Verify Code
