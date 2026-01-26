@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 // @access  Private (Organizer)
 export const createEvent = async (req: AuthRequest, res: Response) => {
   try {
-    const { title, description, type, city, location, slots } = req.body;
+    const { title, description, imageUrl, type, city, location, slots } = req.body;
 
     // Generate event code for UNPAID events if not provided
     let eventCode = undefined;
@@ -20,6 +20,7 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
       organizerId: req.user.id,
       title,
       description,
+      imageUrl,
       type,
       eventCode,
       city,
