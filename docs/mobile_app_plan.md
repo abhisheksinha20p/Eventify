@@ -33,17 +33,17 @@ It is structured logically from **Infrastructure** $\rightarrow$ **Backend Micro
 *Refer to "Database schema per microservice.md" and "Service-wise API contracts (OpenAPI-style).md".*
 
 ### 1. Auth Service (MongoDB)
-- [ ] **Database**: Create `accounts` collection with fields: `email`, `passwordHash`, `role` (ATTENDEE/ORGANIZER), `isVerified`.
-- [ ] **API Implementation**:
-    - [ ] `POST /auth/register`: Handle user creation and distinct role assignment.
-    - [ ] `POST /auth/login`: validate credentials and issue JWT.
-    - [ ] `POST /auth/verify-email`: Handle verification tokens,.
+- [x] **Database**: Create `accounts` collection with fields: `email`, `passwordHash`, `role` (ATTENDEE/ORGANIZER), `isVerified`.
+- [x] **API Implementation**:
+    - [x] `POST /auth/register`: Handle user creation and distinct role assignment.
+    - [x] `POST /auth/login`: validate credentials and issue JWT.
+    - [x] `POST /auth/verify-email`: Handle verification tokens,.
 
 ### 2. User Service (MongoDB)
-- [ ] **Database**: Create `profiles` collection linked via `accountId` (Ref to Auth). Include `city` (Critical for event visibility) and `avatarUrl`.
-- [ ] **API Implementation**:
-    - [ ] `GET /users/me`: Return profile details.
-    - [ ] `PUT /users/me`: Allow profile updates.
+- [x] **Database**: Create `profiles` collection linked via `accountId` (Ref to Auth). Include `city` (Critical for event visibility) and `avatarUrl`.
+- [x] **API Implementation**:
+    - [x] `GET /users/me`: Return profile details.
+    - [x] `PUT /users/me`: Allow profile updates.
 
 ---
 
