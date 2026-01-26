@@ -5,7 +5,7 @@ services:
   # Databases
   # ----------------------------
   
-  # MongoDB - General purpose (Auth, User, Event, Booking, Approval, Notif)
+  # MongoDB - General purpose
   mongo:
     image: mongo:6.0
     container_name: eventify_mongo
@@ -39,6 +39,146 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - eventify_net
+
+  # ----------------------------
+  # Microservices
+  # ----------------------------
+
+  auth-service:
+    build: ./services/auth
+    container_name: eventify_auth
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_auth
+      - JWT_SECRET=supersecretkey
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  user-service:
+    build: ./services/user
+    container_name: eventify_user
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_user
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  event-service:
+    build: ./services/event
+    container_name: eventify_event
+    ports:
+      - "3003:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_event
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  booking-service:
+    build: ./services/booking
+    container_name: eventify_booking
+    ports:
+      - "3004:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_booking
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  approval-service:
+    build: ./services/approval
+    container_name: eventify_approval
+    ports:
+      - "3005:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_approval
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  notification-service:
+    build: ./services/notification
+    container_name: eventify_notification
+    ports:
+      - "3006:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/eventify_notification
+    depends_on:
+      - mongo
+    networks:
+      - eventify_net
+
+  payment-service:
+    build: ./services/payment
+    container_name: eventify_payment
+    ports:
+      - "3007:3000"
+    environment:
+      - PORT=3000
+      - POSTGRES_URL=postgres://user:password@postgres:5432/payment_db
+    depends_on:
+      - postgres
+    networks:
+      - eventify_net
+
+  qr-service:
+    build: ./services/qr
+    container_name: eventify_qr
+    ports:
+      - "3008:3000"
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - eventify_net
+
+  # ----------------------------
+  # API Gateway
+  # ----------------------------
+
+  gateway:
+    build: ./gateway
+    container_name: eventify_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - AUTH_SERVICE_URL=http://auth-service:3000
+      - USER_SERVICE_URL=http://user-service:3000
+      - EVENT_SERVICE_URL=http://event-service:3000
+      - BOOKING_SERVICE_URL=http://booking-service:3000
+      - APPROVAL_SERVICE_URL=http://approval-service:3000
+      - NOTIFICATION_SERVICE_URL=http://notification-service:3000
+      - PAYMENT_SERVICE_URL=http://payment-service:3000
+      - QR_SERVICE_URL=http://qr-service:3000
+    depends_on:
+      - auth-service
+      - user-service
+      - event-service
+      - booking-service
+      - approval-service
+      - notification-service
+      - payment-service
+      - qr-service
     networks:
       - eventify_net
 

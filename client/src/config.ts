@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://192.168.1.4:8080'; // Gateway on port 8080
+export const API_BASE_URL = 'http://localhost:8000'; // Gateway on port 8000
