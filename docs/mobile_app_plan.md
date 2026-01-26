@@ -51,27 +51,27 @@ It is structured logically from **Infrastructure** $\rightarrow$ **Backend Micro
 *Refer to "Database schema per microservice.md" and "Event-driven flow diagram".*
 
 ### 3. Event Service (MongoDB)
-- [ ] **Database**: Create `events` collection.
-    - [ ] Include fields: `type` (PAID/UNPAID), `eventCode` (unique for unpaid), `location` object.
-    - [ ] Embed `slots` document: `capacity`, `bookedCount`, `price` (cents).
-- [ ] **API Implementation**:
-    - [ ] `POST /events`: Organizer only. Create event.
-    - [ ] `GET /events/public`: Filter by `city` (Strict visibility rule for paid events),.
-    - [ ] `GET /events/private/verify`: Validate `eventCode` for private access.
+- [x] **Database**: Create `events` collection.
+    - [x] Include fields: `type` (PAID/UNPAID), `eventCode` (unique for unpaid), `location` object.
+    - [x] Embed `slots` document: `capacity`, `bookedCount`, `price` (cents).
+- [x] **API Implementation**:
+    - [x] `POST /events`: Organizer only. Create event.
+    - [x] `GET /events/public`: Filter by `city` (Strict visibility rule for paid events),.
+    - [x] `GET /events/private/verify`: Validate `eventCode` for private access.
 
 ### 4. Booking Service (MongoDB)
-- [ ] **Database**: Create `bookings` collection.
-    - [ ] Fields: `userId`, `eventId`, `slotId`, `status` (PENDING_PAYMENT, PENDING_APPROVAL, APPROVED).
-- [ ] **API Implementation**:
-    - [ ] `POST /bookings`: Initiate booking.
-    - [ ] `GET /bookings/my`: List user tickets.
-- [ ] **Logic**: Ensure booking creation respects `slot.capacity`.
+- [x] **Database**: Create `bookings` collection.
+    - [x] Fields: `userId`, `eventId`, `slotId`, `status` (PENDING_PAYMENT, PENDING_APPROVAL, APPROVED).
+- [x] **API Implementation**:
+    - [x] `POST /bookings`: Initiate booking.
+    - [x] `GET /bookings/my`: List user tickets.
+- [x] **Logic**: Ensure booking creation respects `slot.capacity`.
 
 ### 5. Approval Service (MongoDB)
-- [ ] **Database**: Create `decisions` collection for audit logs (`action`: APPROVE/REJECT).
-- [ ] **API Implementation**:
-    - [ ] `GET /approvals/{eventId}/applicants`: List pending users for unpaid events.
-    - [ ] `POST /approvals/{bookingId}/decide`: Organizer manual decision. **Note**: Must trigger QR generation on APPROVE.
+- [x] **Database**: Create `decisions` collection for audit logs (`action`: APPROVE/REJECT).
+- [x] **API Implementation**:
+    - [x] `GET /approvals/{eventId}/applicants`: List pending users for unpaid events.
+    - [x] `POST /approvals/{bookingId}/decide`: Organizer manual decision. **Note**: Must trigger QR generation on APPROVE.
 
 ---
 
