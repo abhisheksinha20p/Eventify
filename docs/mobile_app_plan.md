@@ -16,16 +16,16 @@ It is structured logically from **Infrastructure** $\rightarrow$ **Backend Micro
 ## Phase 1: Infrastructure & Environment Setup
 *Strictly follow "Deployment architecture (Gateway + Docker + Cloud).md" and "Technical Stack Document".*
 
-- [ ] **Initialize Monorepo/Structure**: Set up the project structure to support multiple microservices and a mobile client.
-- [ ] **Docker Setup**: Create a `Dockerfile` template for Node.js services (stateless, horizontally scalable).
-- [ ] **Orchestration**: Create a `docker-compose.yml` for local development that spins up:
-    - [ ] MongoDB (Shared instance, distinct DB names per service).
-    - [ ] PostgreSQL (For Payment Service).
-    - [ ] Redis (For QR Service).
-- [ ] **API Gateway**: Initialize a Node.js/Express Gateway.
-    - [ ] Implement request routing to downstream microservices (e.g., `/auth/*` $\rightarrow$ Auth Service).
-    - [ ] Implement JWT validation (`Authorization: Bearer <token>`) middleware.
-    - [ ] Implement Rate Limiting.
+- [x] **Initialize Monorepo/Structure**: Set up the project structure to support multiple microservices and a mobile client.
+- [x] **Docker Setup**: Create a `Dockerfile` template for Node.js services (stateless, horizontally scalable).
+- [x] **Orchestration**: Create a `docker-compose.yml` for local development that spins up:
+    - [x] MongoDB (Shared instance, distinct DB names per service).
+    - [x] PostgreSQL (For Payment Service).
+    - [x] Redis (For QR Service).
+- [x] **API Gateway**: Initialize a Node.js/Express Gateway.
+    - [x] Implement request routing to downstream microservices (e.g., `/auth/*` $\rightarrow$ Auth Service).
+    - [x] Implement JWT validation (`Authorization: Bearer <token>`) middleware.
+    - [x] Implement Rate Limiting.
 
 ---
 
