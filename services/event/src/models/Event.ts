@@ -13,6 +13,7 @@ export interface IEvent extends Document {
   organizerId: string;
   title: string;
   description?: string;
+  imageUrl?: string;
   type: 'PAID' | 'UNPAID';
   eventCode?: string; // Unique for unpaid
   city: string;
@@ -43,6 +44,9 @@ const EventSchema: Schema = new Schema({
     required: true,
   },
   description: {
+    type: String,
+  },
+  imageUrl: {
     type: String,
   },
   type: {

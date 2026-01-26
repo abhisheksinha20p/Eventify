@@ -11,17 +11,12 @@ const EventDetailsScreen = ({ route, navigation }: any) => {
 
   const fetchEventDetails = async () => {
     try {
-      // Need a GET /events/:id endpoint? I implemented GET /events/public.
-      // I should have implemented GET /events/:id in Event Service. 
-      // I'll assume it exists or use the public list for now if I was perfect.
-      // Wait, let's check Event Service controllers. I only had create, public, verify code.
-      // I'll add GET /events/:id to Event Service later if needed.
-      // For now, I'll mock the response or adjust the implementation.
-      const response = await api.get(`/events/public`); // Hack for demo if specific ID missing
-      const found = response.data.find((e: any) => e._id === eventId);
-      setEvent(found);
+      const response = await api.get(`/events/${eventId}`);
+      setEvent(response.data);
     } catch (error) {
       console.error('Fetch event details error:', error);
+      Alert.alert('Error', 'Failed to fetch event details');
+      navigation.goBack();
     } finally {
       setLoading(false);
     }
@@ -84,10 +79,17 @@ const EventDetailsScreen = ({ route, navigation }: any) => {
 
             <Text className="text-white text-3xl font-bold mb-4">{event.title}</Text>
             
+            <View className="mb-4">
+                 <Text className="text-slate-400 text-xs uppercase tracking-wide">Location</Text>
+                 <Text className="text-white text-base">{event.location?.address || 'Location TBD'}</Text>
+            </View>
+
             <View className="flex-row items-center mb-6">
                <View className="bg-surface p-3 rounded-2xl mr-4 flex-1 border border-slate-700">
-                  <Text className="text-slate-500 text-xs mb-1">Time</Text>
-                  <Text className="text-white font-semibold">Dec 20, 7:00 PM</Text>
+                  <Text className="text-slate-500 text-xs mb-1">Start Time</Text>
+                  <Text className="text-white font-semibold">
+                      {new Date(event.slots[0].startTime).toLocaleDateString()} {new Date(event.slots[0].startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </Text>
                </View>
                <View className="bg-surface p-3 rounded-2xl flex-1 border border-slate-700">
                   <Text className="text-slate-500 text-xs mb-1">Price</Text>

@@ -58,12 +58,18 @@ app.use('/users', validateToken, createProxyMiddleware({
 
 app.use('/events/public', createProxyMiddleware({
   target: config.services.event,
-  changeOrigin: true
+  changeOrigin: true,
+  pathRewrite: {
+    '^/events/public': '/', // Rewrite /events/public to /
+  },
 }));
 
 app.use('/events', validateToken, createProxyMiddleware({ 
   target: config.services.event, 
-  changeOrigin: true 
+  changeOrigin: true,
+  pathRewrite: {
+    '^/events': '/', // Rewrite /events to /
+  },
 }));
 
 // Booking Service (Protected)

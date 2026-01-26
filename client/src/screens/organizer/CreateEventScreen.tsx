@@ -7,28 +7,41 @@ import Button from '../../components/ui/Button';
 const CreateEventScreen = ({ navigation }: any) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [city, setCity] = useState('');
+  const [address, setAddress] = useState('');
+  const [date, setDate] = useState('2025-12-20');
+  const [time, setTime] = useState('19:00');
   const [type, setType] = useState<'PAID' | 'UNPAID'>('UNPAID');
   const [price, setPrice] = useState('0');
   const [capacity, setCapacity] = useState('100');
   const [loading, setLoading] = useState(false);
 
   const handleCreate = async () => {
-    if (!title || !city) {
-      Alert.alert('Error', 'Title and City are required.');
+    if (!title || !city || !address || !date || !time) {
+      Alert.alert('Error', 'Please fill in all required fields.');
       return;
     }
 
     setLoading(true);
     try {
+      const startDateTime = new Date(`${date}T${time}:00`);
+      const endDateTime = new Date(startDateTime.getTime() + 2 * 60 * 60 * 1000); // 2 hours default
+
       const payload = {
         title,
         description,
+        imageUrl,
         city,
+        location: {
+            address,
+            lat: 40.7128, // Mock
+            lng: -74.0060
+        },
         type,
         slots: [{
-          startTime: new Date(), // Placeholder
-          endTime: new Date(Date.now() + 3600000), // Placeholder
+          startTime: startDateTime,
+          endTime: endDateTime,
           capacity: parseInt(capacity),
           price: type === 'PAID' ? Math.round(parseFloat(price) * 100) : 0
         }]
@@ -60,8 +73,19 @@ const CreateEventScreen = ({ navigation }: any) => {
         <View className="bg-surface p-6 rounded-3xl border border-slate-700 shadow-xl mb-6">
           <Input label="Event Title" placeholder="Music Festival 2025" value={title} onChangeText={setTitle} />
           <Input label="Description" placeholder="What's this event about?" value={description} onChangeText={setDescription} />
+          <Input label="Image URL" placeholder="https://example.com/image.jpg" value={imageUrl} onChangeText={setImageUrl} />
           <Input label="City" placeholder="New York" value={city} onChangeText={setCity} />
+          <Input label="Address" placeholder="123 Main St" value={address} onChangeText={setAddress} />
           
+          <View className="flex-row gap-4 mb-4">
+            <View className="flex-1">
+                 <Input label="Date (YYYY-MM-DD)" placeholder="2025-12-20" value={date} onChangeText={setDate} />
+            </View>
+            <View className="flex-1">
+                 <Input label="Time (HH:MM)" placeholder="19:00" value={time} onChangeText={setTime} />
+            </View>
+          </View>
+
           <View className="flex-row mb-6 bg-slate-900 p-1 rounded-2xl">
             <TouchableOpacity 
               onPress={() => setType('UNPAID')}
