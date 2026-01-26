@@ -79,25 +79,25 @@ It is structured logically from **Infrastructure** $\rightarrow$ **Backend Micro
 *Refer to "Event-driven flow diagram (Stripe -> Booking -> QR).md".*
 
 ### 6. Payment Service (PostgreSQL)
-- [ ] **Database**: Create `transactions` table.
-    - [ ] Columns: `booking_id`, `stripe_intent_id`, `amount`, `status`.
-- [ ] **Integration**: Implement Stripe SDK.
-- [ ] **API Implementation**:
-    - [ ] `POST /payments/create-intent`: Create Stripe PaymentIntent.
-    - [ ] `POST /payments/webhook`: Listen for `payment_intent.succeeded`.
-    - [ ] **Webhook Logic**: Verify signature $\rightarrow$ Extract `bookingId` $\rightarrow$ Call Booking Service to mark APPROVED $\rightarrow$ Call QR Service to generate code,.
+- [x] **Database**: Create `transactions` table.
+    - [x] Columns: `booking_id`, `stripe_intent_id`, `amount`, `status`.
+- [x] **Integration**: Implement Stripe SDK.
+- [x] **API Implementation**:
+    - [x] `POST /payments/create-intent`: Create Stripe PaymentIntent.
+    - [x] `POST /payments/webhook`: Listen for `payment_intent.succeeded`.
+    - [x] **Webhook Logic**: Verify signature $\rightarrow$ Extract `bookingId` $\rightarrow$ Call Booking Service to mark APPROVED $\rightarrow$ Call QR Service to generate code,.
 
 ### 7. QR & Entry Service (Redis + MongoDB)
-- [ ] **Database**:
-    - [ ] **Redis**: Cache active codes for fast validation.
-    - [ ] **MongoDB**: `qr_codes` (persistence) and `entry_logs` (scan history).
-- [ ] **API Implementation**:
-    - [ ] `GET /qr/{bookingId}`: Retrieve encrypted QR payload.
-    - [ ] `POST /qr/scan`: Organizer validates code. Logic: Check existence $\rightarrow$ Verify status is ACTIVE $\rightarrow$ Mark USED $\rightarrow$ Log entry,.
+- [x] **Database**:
+    - [x] **Redis**: Cache active codes for fast validation.
+    - [x] **MongoDB**: `qr_codes` (persistence) and `entry_logs` (scan history).
+- [x] **API Implementation**:
+    - [x] `GET /qr/{bookingId}`: Retrieve encrypted QR payload.
+    - [x] `POST /qr/scan`: Organizer validates code. Logic: Check existence $\rightarrow$ Verify status is ACTIVE $\rightarrow$ Mark USED $\rightarrow$ Log entry,.
 
 ### 8. Notification Service (MongoDB)
-- [ ] **Database**: Create `devices` collection mapping `userId` to `pushToken`.
-- [ ] **API Implementation**: `POST /notifications/register-device`.
+- [x] **Database**: Create `devices` collection mapping `userId` to `pushToken`.
+- [x] **API Implementation**: `POST /notifications/register-device`.
 
 ---
 
