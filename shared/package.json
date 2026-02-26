@@ -1,0 +1,13 @@
+{
+  "name": "@eventify/shared",
+  "version": "1.0.0",
+  "description": "Shared interfaces and constants for Eventify microservices",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

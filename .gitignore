@@ -49,3 +49,6 @@ C:\Users\abhis\.gemini\antigravity\brain\
 
 # Worktrees
 .worktrees/
+
+# Agent configs
+.agent/
