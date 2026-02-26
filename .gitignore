@@ -46,3 +46,6 @@ android/
 tmp/
 C:\Users\abhis\.gemini\antigravity\brain\
 .gemini
+
+# Worktrees
+.worktrees/
