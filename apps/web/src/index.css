@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #c813ec;
+  --color-background-light: #f8f6f8;
+  --color-background-dark: #1f1022;
+  --font-display: "Spline Sans", sans-serif;
+}
+
+@layer utilities {
+  .glass-header {
+    background: rgba(248, 246, 248, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .hero-gradient {
+    background: linear-gradient(rgba(31, 16, 34, 0.4), rgba(31, 16, 34, 0.8));
+  }
+}
