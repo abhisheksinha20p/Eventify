@@ -12,9 +12,9 @@ export const Header: React.FC = () => {
         </div>
         
         <nav className="hidden md:flex items-center gap-10">
-          <a className="text-sm font-semibold hover:text-primary transition-colors" href="#">Browse Events</a>
-          <a className="text-sm font-semibold hover:text-primary transition-colors" href="#">Host an Event</a>
-          <a className="text-sm font-semibold hover:text-primary transition-colors" href="#">Pricing</a>
+          <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Browse Events</a>
+          <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Host an Event</a>
+          <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Pricing</a>
         </nav>
         
         <div className="flex items-center gap-4">
