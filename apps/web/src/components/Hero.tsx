@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Hero: React.FC = () => {
   return (
     <section className="relative h-[85vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockParticipants } from '../../data/mockData';
 
 export const ParticipantsSidebar: React.FC = () => {

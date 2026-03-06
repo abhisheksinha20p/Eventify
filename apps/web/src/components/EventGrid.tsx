@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockCategories, mockEvents } from '../data/mockData';
 
 export const EventGrid: React.FC = () => {

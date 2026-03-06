@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockJoinedEvents, mockDirectMessages } from '../../data/mockData';
 
 export const CommunitySidebar: React.FC = () => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommunitySidebar } from '../components/Community/Sidebar';
 import { ChatArea } from '../components/Community/ChatArea';
 import { ParticipantsSidebar } from '../components/Community/ParticipantsSidebar';

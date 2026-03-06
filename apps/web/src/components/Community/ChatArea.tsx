@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockChatMessages, mockParticipants } from '../../data/mockData';
 
 export const ChatArea: React.FC = () => {
