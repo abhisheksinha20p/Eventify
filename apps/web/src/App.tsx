@@ -7,12 +7,25 @@ import { Footer } from './components/Footer';
 import { CommunityPage } from './pages/CommunityPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { EventDetailsPage } from './pages/EventDetailsPage';
+import { MyTicketsPage } from './pages/MyTicketsPage';
+import { TicketQRPage } from './pages/TicketQRPage';
+import { JoinPrivateEventPage } from './pages/JoinPrivateEventPage';
+import { OrganizerDashboard } from './pages/OrganizerDashboard';
+import { CreateEventPage } from './pages/CreateEventPage';
+import { AttendeeManagementPage } from './pages/AttendeeManagementPage';
 
-type View = 'home' | 'community' | 'login' | 'register' | 'events' | 'tickets' | 'create-event' | 'manage-attendees';
+type View = 'home' | 'community' | 'login' | 'register' | 'events' | 'tickets' | 'create-event' | 'manage-attendees' | 'event-details' | 'qr-ticket' | 'join-private';
 
 function AppContent() {
   const [view, setView] = useState<View>('home');
-  const { user, isLoggedIn } = useAuth();
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  const { isLoggedIn, user } = useAuth();
+
+  const handleSelectEvent = (id: string) => {
+    setSelectedEventId(id);
+    setView('event-details');
+  };
 
   // Root level rendering based on view
   if (view === 'login') return <LoginPage onNavigate={setView} />;
@@ -33,13 +46,29 @@ function AppContent() {
       <main className="pt-20">
         {view === 'home' && (
           <>
-            <Hero />
-            <EventGrid />
+            {isLoggedIn && user?.role === 'organizer' ? (
+              <OrganizerDashboard onNavigate={setView} />
+            ) : (
+              <>
+                <Hero />
+                <EventGrid onSelectEvent={handleSelectEvent} />
+              </>
+            )}
           </>
         )}
+
+        {view === 'event-details' && selectedEventId && (
+          <EventDetailsPage eventId={selectedEventId} onNavigate={setView} />
+        )}
+
+        {view === 'tickets' && <MyTicketsPage onNavigate={setView} />}
+        {view === 'qr-ticket' && <TicketQRPage onNavigate={setView} />}
+        {view === 'join-private' && <JoinPrivateEventPage onNavigate={setView} />}
+        {view === 'create-event' && <CreateEventPage onNavigate={setView} />}
+        {view === 'manage-attendees' && <AttendeeManagementPage onNavigate={setView} />}
         
         {/* Placeholder for other views */}
-        {(['events', 'tickets', 'create-event', 'manage-attendees'].includes(view)) && (
+        {(['events'].includes(view)) && (
           <div className="max-w-7xl mx-auto px-6 py-32 text-center text-slate-400">
             <span className="material-symbols-outlined text-6xl mb-4 opacity-20">construction</span>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{view.replace('-', ' ').toUpperCase()}</h2>
