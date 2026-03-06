@@ -86,3 +86,46 @@ export const mockEvents: EventItem[] = [
     isFeatured: false,
   }
 ];
+
+export const mockJoinedEvents = [
+  { id: 'e1', title: 'Tech Summit 2024', active: true },
+  { id: 'e2', title: 'Summer Music Fest', active: false },
+  { id: 'e3', title: 'Design Conference', active: false },
+  { id: 'e4', title: 'Marketing Meetup', active: false },
+];
+
+export const mockDirectMessages = [
+  { id: 'dm1', name: 'Sarah M.', online: true },
+  { id: 'dm2', name: 'David K.', online: false },
+];
+
+export const mockChatMessages = [
+  {
+    id: 'm1',
+    user: 'Alex Chen',
+    role: 'Host',
+    time: '10:05 AM',
+    content: 'Welcome everyone to the Tech Summit! 🎉 Make sure to check out the opening keynote at 10 AM in the Main Hall. We have some exciting announcements about the new AI features.',
+    link: { text: 'summit2024.live/keynote', url: '#' }
+  },
+  {
+    id: 'm2',
+    user: 'Sarah M.',
+    role: 'Frontend Dev',
+    time: '10:08 AM',
+    content: 'Yes @David! Room 3 is open for general networking. See you all there.',
+  }
+];
+
+export const mockParticipants = {
+  hosts: [
+    { id: 'p1', name: 'Alex Chen', role: 'Event Organizer', isHost: true }
+  ],
+  online: [
+    { id: 'p2', name: 'Sarah M.', role: 'Frontend Dev' },
+    { id: 'p3', name: 'David K.', role: 'Product Designer' },
+    { id: 'p4', name: 'Elena J.', role: 'Marketing' }
+  ],
+  total: 250,
+  onlineCount: 42
+};
