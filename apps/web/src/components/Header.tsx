@@ -1,8 +1,15 @@
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate: (view: 'home' | 'community') => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   return (
     <header className="fixed top-0 z-50 w-full glass-header border-b border-primary/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-2 group cursor-pointer">
+        <div 
+          className="flex items-center gap-2 group cursor-pointer"
+          onClick={() => onNavigate('home')}
+        >
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/30">
             <span className="material-symbols-outlined text-2xl">confirmation_number</span>
           </div>
@@ -10,8 +17,19 @@ export const Header: React.FC = () => {
         </div>
         
         <nav className="hidden md:flex items-center gap-10">
-          <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Browse Events</a>
+          <button 
+            onClick={() => onNavigate('home')}
+            className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors"
+          >
+            Browse Events
+          </button>
           <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Host an Event</a>
+          <button 
+            onClick={() => onNavigate('community')}
+            className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors"
+          >
+            Community
+          </button>
           <a className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#">Pricing</a>
         </nav>
         

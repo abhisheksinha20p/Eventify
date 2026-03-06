@@ -1,9 +1,16 @@
 import { mockJoinedEvents, mockDirectMessages } from '../../data/mockData';
 
-export const CommunitySidebar: React.FC = () => {
+interface SidebarProps {
+  onNavigate: (view: 'home' | 'community') => void;
+}
+
+export const CommunitySidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
   return (
     <aside className="w-64 bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col h-screen sticky top-0">
-      <div className="p-6 border-b border-slate-200 dark:border-slate-800">
+      <div 
+        className="p-6 border-b border-slate-200 dark:border-slate-800 cursor-pointer"
+        onClick={() => onNavigate('home')}
+      >
         <div className="flex items-center gap-2 text-primary">
           <span className="material-symbols-outlined font-bold">confirmation_number</span>
           <span className="text-xl font-bold text-slate-900 dark:text-white">Eventify</span>
@@ -14,22 +21,31 @@ export const CommunitySidebar: React.FC = () => {
         <div>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+              <button 
+                onClick={() => onNavigate('home')}
+                className="w-full flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+              >
                 <span className="material-symbols-outlined">dashboard</span>
                 <span className="font-medium">Dashboard</span>
-              </a>
+              </button>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+              <button 
+                onClick={() => onNavigate('home')}
+                className="w-full flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+              >
                 <span className="material-symbols-outlined">calendar_month</span>
                 <span className="font-medium">Events</span>
-              </a>
+              </button>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors">
+              <button 
+                onClick={() => onNavigate('community')}
+                className="w-full flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors"
+              >
                 <span className="material-symbols-outlined">forum</span>
                 <span className="font-medium">Community</span>
-              </a>
+              </button>
             </li>
           </ul>
         </div>
